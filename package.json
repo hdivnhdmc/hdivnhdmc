@@ -1,0 +1,12 @@
+{
+  "name": "fxlbot",
+  "version": "1.0.0",
+  "description": "Minecraft AFK Bot - fxlbot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "mineflayer": "^4.23.0"
+  }
+}
