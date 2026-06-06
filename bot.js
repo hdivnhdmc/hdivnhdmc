@@ -19,7 +19,24 @@ tg.onText(/\/start/, (msg) => {
     `⏹ \`/disconnect\` — قطع الاتصال\n` +
     `📊 \`/bots\` — البوتات الشغّالة`,
     { parse_mode: 'Markdown' }
-  );
+   tg.onText(/\/stop/, (msg) => {
+  const chatId = msg.chat.id;
+
+  Object.keys(activeBots).forEach(key => {
+    if (key.startsWith(`${chatId}_`)) {
+      stoppedBots[key] = true;
+
+      try {
+        activeBots[key].bot.quit();
+      } catch(e) {}
+
+      delete activeBots[key];
+    }
+  });
+
+  tg.sendMessage(chatId, '⏹ تم إيقاف البوت نهائياً');
+});
+      );
 });
 
 // ===== /connect =====
@@ -95,9 +112,9 @@ function startMCBot(chatId, host, port, key) {
     const bot = mineflayer.createBot({
       host,
       port,
-      username: 'fxlbot',
+      username: 'fxlbot','fxlbot2', 
       auth: 'offline',
-      version: false,
+      version: 1.21.11,
       keepAlive: true,
       checkTimeoutInterval: 30000,
     });
